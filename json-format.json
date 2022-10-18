@@ -1,0 +1,27 @@
+{
+    "sender": "id",
+    "message_type": "request",
+    "request_for": "id_prise"
+}
+
+{
+    "sender": "id",
+    "message_type": "set",
+    "prise": "id_prise",
+    "power": true
+}
+
+{
+    "sender": "id_prise",
+    "message_type": "reply",
+    "state": true,
+    "temp": 20
+}
+
+{
+    "sender": "id_prise",
+    "message_type": "schedule",
+    "state": true,
+    "start": 00,
+    "end": 00
+}

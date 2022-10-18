@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+
+{% block h1 %}Hello World{% endblock h1 %}
+{% block content %}
+    <h2>Prise1</h2>
+    <p>{{prise1.state}}, {{prise1.temp}}</p>
+    <h2>Prise2</h2>
+    <p>{{prise2.state}}, {{prise2.temp}}</p>
+    <a href="/set/prise1/on">Set prise1 on</a>
+    <a href="/set/prise1/off">Set prise1 off</a>
+    <a href="/set/prise2/on">Set prise2 on</a>
+    <a href="/set/prise2/off">Set prise2 off</a>
+    <a href="/request/prise1">Request prise1</a>
+    <a href="/request/prise2">Request prise2</a>
+{% endblock content %}
