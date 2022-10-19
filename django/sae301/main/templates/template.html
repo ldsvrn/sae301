@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
 <html lang="fr">
-{% load static %}
 <head>
     <meta charset="UTF-8">
-    {% comment %} <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}"> {% endcomment %}
+    {% comment %} <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"> {% endcomment %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
     <title>{% block title %} SAE301 {% endblock %}</title>
 </head>
 
-<div>
+<div id="main">
     <h1>{% block h1 %}{% endblock h1 %}</h1>
     {% block content %}{% endblock content%}
 </div>

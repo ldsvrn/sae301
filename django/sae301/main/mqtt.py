@@ -19,6 +19,7 @@ class MQTTClient:
                 "message_type": "placeholder",
                 "prise": "placeholder",
                 "state": "placeholder",
+                "temp": "placeholder",
                 "timestamp": datetime.datetime.fromtimestamp(0)
             }
 
@@ -33,19 +34,23 @@ class MQTTClient:
         try:
             message = json.loads(msg.payload.decode("utf-8"))
         except Exception:
-            pass
-
+            message = self.placeholder # pour éviter une erreur si le premier payload n'est pas un json
+        
         # On récupère uniquement les reply, on rajoute un timestamp
         # recréation d'un dico parceque il voulait pas modifier message
-        if message["message_type"] == "reply":
-            self.__last_message = {
-                "sender": message["sender"],
-                "message_type": message["message_type"], # = reply
-                "state": message["state"],
-                "temp": message["temp"],
-                "timestamp": datetime.datetime.now()
-            }
-    
+        # on ignore les erreurs, elles ne sont pas importantes ici
+        try:
+            if message["message_type"] == "reply":
+                self.__last_message = {
+                    "sender": message["sender"],
+                    "message_type": message["message_type"], # = reply
+                    "state": message["state"],
+                    "temp": message["temp"],
+                    "timestamp": datetime.datetime.now()
+                }
+        except Exception:
+            pass
+        
     # a changer si la librarie arduino ne peux pas listen sur le topic et répondre quand il faut
     def publish_request(self, request_for):
         self.client.publish(self.topic, str(json.dumps(

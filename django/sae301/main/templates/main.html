@@ -1,11 +1,30 @@
 {% extends 'template.html' %}
 
-{% block h1 %}Hello World{% endblock h1 %}
+{% block h1 %}Prises connectés{% endblock h1 %}
 {% block content %}
-    <h2>Prise1</h2>
-    <p>{{prise1.state}}, {{prise1.temp}}</p>
-    <h2>Prise2</h2>
-    <p>{{prise2.state}}, {{prise2.temp}}</p>
+    <h2 class="prises">Prise 1</h2>
+    {% if prise1.state == True %}
+        <a type="button" class="btn btn-danger" href="/set/prise1/off">Éteindre</a>
+    {% elif prise1.state == False %}
+        <a type="button" class="btn btn-success" href="/set/prise1/on">Allumer</a>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        Impossible de récupérer l'état de la prise
+    </div>
+    {% endif %}
+
+
+    <h2 class="prises">Prise 2</h2>
+    {% if prise2.state == True %}
+        <a type="button" class="btn btn-danger" href="/set/prise2/off">Éteindre</a>
+    {% elif prise2.state == False %}
+        <a type="button" class="btn btn-success" href="/set/prise2/on">Allumer</a>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Impossible de récupérer l'état de la prise
+        </div>
+    {% endif %}
+
     <a href="/set/prise1/on">Set prise1 on</a>
     <a href="/set/prise1/off">Set prise1 off</a>
     <a href="/set/prise2/on">Set prise2 on</a>

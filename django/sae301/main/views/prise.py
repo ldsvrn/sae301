@@ -9,8 +9,8 @@ mqtt = MQTTClient("broker.emqx.io", 1883, "testsae301/prises/")
 
 def main(request):
     data = mqtt.last_message
-    prise1 = mqtt.request_wait("prise1", 20)
-    prise2 = mqtt.request_wait("prise2", 20)
+    prise1 = mqtt.request_wait("prise1", 1)
+    prise2 = mqtt.request_wait("prise2", 1)
     return render(request, 'main.html', {
         "prise1": {"state": prise1["state"], "temp": prise1["temp"]},
         "prise2": {"state": prise2["state"], "temp": prise2["temp"]}
