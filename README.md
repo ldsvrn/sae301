@@ -2,9 +2,7 @@
 
 ## Cahier des charges :
 
-## Dans un premier temps, il vous est demandé :
-
-### 1. De concevoir la carte électronique de cette prise connectée en Wifi (cf. EasyEDA : https://easyeda.com/fr).
+### 1. Dans un premier temps, concevoir la carte électronique de cette prise connectée en Wifi (cf. EasyEDA : https://easyeda.com/fr).
 Les composants électroniques doivent répondre aux critères suivants (liste non exhaustive et sans ordre de préférence)
 
 >a. Taille de la carte électronique
