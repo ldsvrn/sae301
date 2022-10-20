@@ -8,13 +8,13 @@
 ### 1. De concevoir la carte électronique de cette prise connectée en Wifi (cf. EasyEDA : https://easyeda.com/fr).
 Les composants électroniques doivent répondre aux critères suivants (liste non exhaustive et sans ordre de préférence)
 '''
->a. Taille de la carte électronique
->b. Taille de la prise électrique (estimation)
->c. Poids (estimation)
->d. Prix global de fabrication 
->e. Wifi intégré
->f. Consommation
->g. Etc.
+a. Taille de la carte électronique
+b. Taille de la prise électrique (estimation)
+c. Poids (estimation)
+d. Prix global de fabrication 
+e. Wifi intégré
+f. Consommation
+g. Etc.
 '''
 
 Vous devez justifier votre solution, notamment en énumérant vos critères par ordre de priorité !
