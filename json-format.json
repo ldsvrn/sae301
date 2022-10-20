@@ -8,7 +8,7 @@
     "sender": "id",
     "message_type": "set",
     "prise": "id_prise",
-    "power": true
+    "state": true
 }
 
 {

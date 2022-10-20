@@ -5,8 +5,10 @@
     <h2 class="prises">Prise 1</h2>
     {% if prise1.state == True %}
         <a type="button" class="btn btn-danger" href="/set/prise1/off">Éteindre</a>
+        <p>{{prise1.temp}}°C</p>
     {% elif prise1.state == False %}
         <a type="button" class="btn btn-success" href="/set/prise1/on">Allumer</a>
+        <p>{{prise1.temp}}°C</p>
     {% else %}
     <div class="alert alert-danger" role="alert">
         Impossible de récupérer l'état de la prise
@@ -17,14 +19,17 @@
     <h2 class="prises">Prise 2</h2>
     {% if prise2.state == True %}
         <a type="button" class="btn btn-danger" href="/set/prise2/off">Éteindre</a>
+        <p>{{prise2.temp}}°C </p>
     {% elif prise2.state == False %}
         <a type="button" class="btn btn-success" href="/set/prise2/on">Allumer</a>
+        <p>{{prise2.temp}}°C </p>
     {% else %}
         <div class="alert alert-danger" role="alert">
             Impossible de récupérer l'état de la prise
         </div>
     {% endif %}
 
+    <h2>debug</h2>
     <a href="/set/prise1/on">Set prise1 on</a>
     <a href="/set/prise1/off">Set prise1 off</a>
     <a href="/set/prise2/on">Set prise2 on</a>

@@ -74,7 +74,7 @@ class MQTTClient:
         start = datetime.datetime.now()
         # code dégueu permettant d'attendre la réponse de la prise pendant x secondes (timeout)
         # ignore les messages qui sont vieux de 5 secondes
-        while self.__last_message["sender"] != prise or datetime.datetime.now() - self.__last_message["timestamp"] > datetime.timedelta(seconds=5):
+        while self.__last_message["sender"] != prise or datetime.datetime.now() - self.__last_message["timestamp"] > datetime.timedelta(seconds=1):
             if datetime.datetime.now() - start > datetime.timedelta(seconds=timeout):
                 return self.placeholder
                 
