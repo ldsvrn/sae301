@@ -1,4 +1,4 @@
-# sae301 Projet "Prise Connectée Inteliggente Wifi
+# sae301 Projet "Prise Connectée Intelligente Wifi
 
 ## Cahier des charges :
 
