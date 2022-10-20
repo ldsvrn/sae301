@@ -11,7 +11,7 @@ Les composants électroniques doivent répondre aux critères suivants (liste no
 >a. Taille de la carte électronique
 >b. Taille de la prise électrique (estimation)
 >c. Poids (estimation)
->d. Prix global de fabrication 
+>d. Prix global de fabrication
 >e. Wifi intégré
 >f. Consommation
 >g. Etc.
@@ -22,15 +22,15 @@ Vous devez justifier votre solution, notamment en énumérant vos critères par 
 
 ### 3. De réaliser un serveur WEB hébergé par un Raspberry Pi.
   La page WEB doit pouvoir :
-'''
+
 >a. Commander au moins 2 prises en ON/OFF avec retour de l'état ON ou OFF de la prise.
 >b. Activer au moins deux plages horaires journalières sur une des deux prises. Les plages horaires journalières seront programmées en « dur » côté Raspberry (donc pas depuis la page WEB, pour l'instant). La page WEB doit indiquer si la programmation est activée ou non.
-'''
+
   Le Raspberry PI peut indiquer, par des LEDs, pour chacune des prises :
-'''
+
 >a. L'état ON ou OFF
 >b. L'activation des plages horaires.
-'''
+
 
 ## Dans un deuxième temps, on vous demande :
 1. De réaliser une application Android reprenant les fonctionnalités proposées par la page WEB précédente.
