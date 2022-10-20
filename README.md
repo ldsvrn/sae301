@@ -9,11 +9,17 @@
 Les composants électroniques doivent répondre aux critères suivants (liste non exhaustive et sans ordre de préférence)
 
 >a. Taille de la carte électronique
+>
 >b. Taille de la prise électrique (estimation)
+>
 >c. Poids (estimation)
+>
 >d. Prix global de fabrication
+>
 >e. Wifi intégré
+>
 >f. Consommation
+>
 >g. Etc.
 
 
@@ -29,6 +35,7 @@ Vous devez justifier votre solution, notamment en énumérant vos critères par 
   Le Raspberry PI peut indiquer, par des LEDs, pour chacune des prises :
 
 >a. L'état ON ou OFF
+>
 >b. L'activation des plages horaires.
 
 
