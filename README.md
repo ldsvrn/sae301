@@ -7,15 +7,15 @@
 
 ### 1. De concevoir la carte électronique de cette prise connectée en Wifi (cf. EasyEDA : https://easyeda.com/fr).
 Les composants électroniques doivent répondre aux critères suivants (liste non exhaustive et sans ordre de préférence)
-'''
-a. Taille de la carte électronique
-b. Taille de la prise électrique (estimation)
-c. Poids (estimation)
-d. Prix global de fabrication 
-e. Wifi intégré
-f. Consommation
-g. Etc.
-'''
+
+>a. Taille de la carte électronique
+>b. Taille de la prise électrique (estimation)
+>c. Poids (estimation)
+>d. Prix global de fabrication 
+>e. Wifi intégré
+>f. Consommation
+>g. Etc.
+
 
 Vous devez justifier votre solution, notamment en énumérant vos critères par ordre de priorité !
 ### 2. L'allumage ou l'extinction de l'appareil branché sur la prise peut se faire depuis l'unique bouton poussoir (cf. le côté latéral gauche de la photo). Une LED indiquera l'état de l'interrupteur commandé. Noter que l'action sur le bouton poussoir doit être visible sur les interfaces web et Android demandées dans les parties suivantes .
