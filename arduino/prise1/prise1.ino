@@ -13,7 +13,7 @@ bool ledflag = false;     // LED status flag
 const char* ssid = "honor 9x";                 //use your ssid
 const char* password = "wifihonor9x";    //use your password
 const char* mqtt_server = "mqtt.louis.systems";
-const char* topic = "testsae301/prises/";
+const char* topic = "prises";
 
 #define ONE_WIRE_BUS D3                            // Pin de connexion de la DS18B20
 float valTemp = 0.0;                                    // Variables contenant la valeur de température.

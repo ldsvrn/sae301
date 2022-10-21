@@ -6,16 +6,16 @@
 #include <DallasTemperature.h>    //Librairie du capteur
 #include <ArduinoJson.h>
 
-const int button = 13;    // GPIO 8 for the button
+const int button = D2;    // GPIO 8 for the button
 bool ledflag = false;     // LED status flag
 
 // Update these with values suitable for your network.
 const char* ssid = "honor 9x";                 //use your ssid
 const char* password = "wifihonor9x";    //use your password
 const char* mqtt_server = "mqtt.louis.systems";
-const char* topic = "testsae301/prises/";
+const char* topic = "prises";
 
-#define ONE_WIRE_BUS 14                             // Pin de connexion de la DS18B20
+#define ONE_WIRE_BUS D3                            // Pin de connexion de la DS18B20
 float valTemp = 0.0;                                    // Variables contenant la valeur de température.
 float valTemp_T;                                // Valeurs de relevé temporaires.
 #define tempsPause 30                           // Nbre de secondes de pause (3600 = 1H00)
@@ -109,8 +109,8 @@ void reconnect() {
 void setup() {
     sensors.begin();                 // On initialise la bibliothèque Dallas
     pinMode(button, INPUT);    // define button as an input
-    pinMode(12, OUTPUT);         // define LED as an output
-    digitalWrite(12, LOW);     // turn output off just in case
+    pinMode(D1, OUTPUT);         // define LED as an output
+    digitalWrite(D1, LOW);     // turn output off just in case
     Serial.begin(115200);
     setup_wifi();
     client.setServer(mqtt_server, 1883);
@@ -140,9 +140,9 @@ void loop() {
     }
     
     if (ledflag) {
-        digitalWrite(12, HIGH);
+        digitalWrite(D1, HIGH);
     } else {
-        digitalWrite(12, LOW);
+        digitalWrite(D1, LOW);
     }
 
     if (!client.connected()) {

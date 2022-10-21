@@ -79,8 +79,15 @@ class MQTTClient:
                 
         return self.__last_message
 
-    def set_schedule(self, prise: str, state: bool, start: datetime.datetime, end: datetime.datetime):
-        pass
+    def set_schedule(self, prise: str, start: datetime.time, end: datetime.time):
+        self.client.publish(self.topic, str(json.dumps(
+            {
+                "sender": self.clientid,
+                "message_type": "schedule",
+                "prise": prise,
+                "start": start.isoformat(timespec="minutes"),
+                "end": end.isoformat(timespec="minutes")
+            })))
 
     def close(self):
         self.client.loop_stop()

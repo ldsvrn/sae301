@@ -1,3 +1,4 @@
+sender un peu useless sauf dans le reply
 {
     "sender": "id",
     "message_type": "request",
@@ -18,9 +19,11 @@
     "temp": 20
 }
 
+envoyé dans le topic schedule
 {
-    "sender": "id_prise",
+    "sender": "id",
     "message_type": "schedule",
+    "prise": "id_prise",
     "state": true,
     "start": 00,
     "end": 00
