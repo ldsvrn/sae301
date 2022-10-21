@@ -1,4 +1,3 @@
-from email import message
 import paho.mqtt.client as mqtt
 import random
 import json
