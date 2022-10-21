@@ -135,6 +135,7 @@ void sendReply() {
 void loop() {
     if (digitalRead(button) == HIGH) {    // if button is pressed
         ledflag = !ledflag;
+        sendReply();
         delay(500);
     }
     
