@@ -6,7 +6,7 @@ from ..mqtt import MQTTClient
 global mqtt
 
 # mqtt last will / testament
-mqtt = MQTTClient("broker.emqx.io", 1883, "testsae301/prises/")
+mqtt = MQTTClient("mqtt.louis.systems", 1883, "testsae301/prises/")
 
 def main(request):
     data = mqtt.last_message
