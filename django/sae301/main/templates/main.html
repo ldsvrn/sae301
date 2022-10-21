@@ -1,6 +1,6 @@
 {% extends 'template.html' %}
 
-{% block h1 %}Prises connectés{% endblock h1 %}
+{% block h1 %}Prises connectées{% endblock h1 %}
 {% block content %}
     <h2 class="prises">Prise 1</h2>
     {% if prise1.state == True %}
@@ -26,6 +26,17 @@
     {% else %}
         <div class="alert alert-danger" role="alert">
             Impossible de récupérer l'état de la prise
+        </div>
+    {% endif %}
+
+    <h2 class="prises">Toutes les prises</h2>
+    {% if prise1.state == True and prise2.state == True %}
+        <a type="button" class="btn btn-danger" href="/set/all/off">Éteindre</a>
+    {% elif prise1.state == False and prise2.state == False %}
+        <a type="button" class="btn btn-success" href="/set/all/on">Allumer</a>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Les deux prises ne sont pas connectées
         </div>
     {% endif %}
 
