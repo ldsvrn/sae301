@@ -6,16 +6,16 @@
 #include <DallasTemperature.h>    //Librairie du capteur
 #include <ArduinoJson.h>
 
-const int button = D2;    // GPIO 8 for the button
+const int button = 13;    // GPIO 8 for the button
 bool ledflag = false;     // LED status flag
 
 // Update these with values suitable for your network.
 const char* ssid = "honor 9x";                 //use your ssid
 const char* password = "wifihonor9x";    //use your password
-const char* mqtt_server = "broker.emqx.io";
+const char* mqtt_server = "mqtt.louis.systems";
 const char* topic = "testsae301/prises/";
 
-#define ONE_WIRE_BUS D3                             // Pin de connexion de la DS18B20
+#define ONE_WIRE_BUS 14                             // Pin de connexion de la DS18B20
 float valTemp = 0.0;                                    // Variables contenant la valeur de température.
 float valTemp_T;                                // Valeurs de relevé temporaires.
 #define tempsPause 30                           // Nbre de secondes de pause (3600 = 1H00)
@@ -68,13 +68,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     const char* message_type = doc["message_type"];
     if (strcmp(message_type,"request") == 0 ) {
-        if (doc["request_for"] == "prise1"){
+        if (doc["request_for"] == "prise2"){
             sendReply();
         }
     }
 
     if (strcmp(message_type,"set") == 0 ) {
-        if (doc["prise"] == "prise1" || doc["prise"] == "all"){
+        if (doc["prise"] == "prise2" || doc["prise"] == "all"){
             bool state = doc["state"];
             ledflag = state;
             Serial.println(state);
@@ -109,8 +109,8 @@ void reconnect() {
 void setup() {
     sensors.begin();                 // On initialise la bibliothèque Dallas
     pinMode(button, INPUT);    // define button as an input
-    pinMode(D1, OUTPUT);         // define LED as an output
-    digitalWrite(D1, LOW);     // turn output off just in case
+    pinMode(12, OUTPUT);         // define LED as an output
+    digitalWrite(12, LOW);     // turn output off just in case
     Serial.begin(115200);
     setup_wifi();
     client.setServer(mqtt_server, 1883);
@@ -124,9 +124,9 @@ float getTemperatureC() {
 
 void sendReply() {
     if (ledflag) {
-        sprintf(msg, "{\"sender\": \"prise1\", \"message_type\": \"reply\", \"state\": true, \"temp\": \"%f\"}", getTemperatureC());
+        sprintf(msg, "{\"sender\": \"prise2\", \"message_type\": \"reply\", \"state\": true, \"temp\": \"%f\"}", getTemperatureC());
     } else {
-        sprintf(msg, "{\"sender\": \"prise1\", \"message_type\": \"reply\", \"state\": false, \"temp\": \"%f\"}", getTemperatureC());
+        sprintf(msg, "{\"sender\": \"prise2\", \"message_type\": \"reply\", \"state\": false, \"temp\": \"%f\"}", getTemperatureC());
     }
     client.publish(topic, msg);
     //client.subscribe(topic);
@@ -139,9 +139,9 @@ void loop() {
     }
     
     if (ledflag) {
-        digitalWrite(D1, HIGH);
+        digitalWrite(12, HIGH);
     } else {
-        digitalWrite(D1, LOW);
+        digitalWrite(12, LOW);
     }
 
     if (!client.connected()) {
