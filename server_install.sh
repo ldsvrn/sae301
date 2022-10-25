@@ -27,7 +27,7 @@ After=network.target
 User=toto
 Group=www-data
 WorkingDirectory=/home/toto/django/django
-ExecStart=/home/toto/django/django/.venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock sae301.wsgi:application
+ExecStart=/home/toto/django/django/sae301/.venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock sae301.wsgi:application
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -41,7 +41,7 @@ server {
     server_name mqtt.louis.systems;
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/toto/django/django;
+        root /home/toto/django/django/sae301;
     }
     location / {
         include proxy_params;
@@ -50,11 +50,6 @@ server {
 }
 EOF
 
-
 ln -s /etc/nginx/sites-available/sae301 /etc/nginx/sites-enabled/
 
 systemctl restart nginx
-
-ufw enable
-ufw allow 22/tcp
-ufw allow 80/tcp
