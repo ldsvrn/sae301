@@ -26,7 +26,7 @@ After=network.target
 [Service]
 User=toto
 Group=www-data
-WorkingDirectory=/home/toto/django/django
+WorkingDirectory=/home/toto/django/django/sae301
 ExecStart=/home/toto/django/django/sae301/.venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock sae301.wsgi:application
 [Install]
 WantedBy=multi-user.target
