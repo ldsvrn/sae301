@@ -9,6 +9,8 @@ chmod 774 /home/toto/django/user_install.sh
 
 su - toto -c '/home/toto/django/user_install.sh'
 
+echo "192.168.69.2 mqtt.louis.systems" >> /etc/hosts
+
 cat << EOS > /etc/systemd/system/gunicorn.socket
 [Unit]
 Description=gunicorn socket
@@ -40,8 +42,8 @@ server {
     listen 80;
     server_name mqtt.louis.systems;
     location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/toto/django/django/sae301;
+    location /static {
+        root /home/toto/django/django/sae301/static;
     }
     location / {
         include proxy_params;
