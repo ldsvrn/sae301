@@ -36,13 +36,13 @@ EOF
 systemctl start gunicorn.socket
 systemctl enable gunicorn.socket
 
-cat << EOF > /etc/nginx/sites-available/sae301
+cat << EOF > /etc/nginx/sites-available/mqtt.louis.systems
 server {
     listen 80;
     server_name mqtt.louis.systems;
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static {
-        root /home/toto/django/django/sae301/static;
+        root /var/www/;
     }
     location / {
         include proxy_params;
@@ -51,7 +51,7 @@ server {
 }
 EOF
 
-ln -s /etc/nginx/sites-available/sae301 /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/mqtt.louis.systems /etc/nginx/sites-enabled/
 
 cp -r /home/toto/django/django/sae301/static /var/www/static
 chown -R www-data:www-data /var/www/static
@@ -59,3 +59,7 @@ chown -R www-data:www-data /var/www/static
 chmod -R 777 /var/www/static
 
 systemctl restart nginx
+
+apt install certbot python3-certbot-nginx
+
+certbot --nginx -d mqtt.louis.systems
