@@ -6,10 +6,9 @@ apt install git nginx python3 python3-pip python3-venv python3-dev -y
 useradd -m toto
 su - toto -c "git clone https://github.com/ldsvrn/SAE301 /home/toto/django"
 chmod 774 /home/toto/django/user_install.sh
+echo "192.168.69.2 mqtt.louis.systems" >> /etc/hosts
 
 su - toto -c '/home/toto/django/user_install.sh'
-
-echo "192.168.69.2 mqtt.louis.systems" >> /etc/hosts
 
 cat << EOS > /etc/systemd/system/gunicorn.socket
 [Unit]
@@ -53,5 +52,10 @@ server {
 EOF
 
 ln -s /etc/nginx/sites-available/sae301 /etc/nginx/sites-enabled/
+
+cp -r /home/toto/django/django/sae301/static /var/www/static
+chown -R www-data:www-data /var/www/static
+# flemme de chercher la soluce donc lets go osef le serv tournera pas longtemps
+chmod -R 777 /var/www/static
 
 systemctl restart nginx
