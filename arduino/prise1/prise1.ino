@@ -1,17 +1,15 @@
-#include <ESP8266WiFi.h>     // Import ESP8266 WiFi library
 #include <PubSubClient.h>    // Import PubSubClient library to initialize MQTT protocol
 #include <stdio.h>
 #include <stdlib.h>
 #include <OneWire.h>                        //Librairie du bus OneWire
 #include <DallasTemperature.h>    //Librairie du capteur
 #include <ArduinoJson.h>
+#include <FS.h>          // this needs to be first, or it all crashes and burns...
+#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 
 const int button = D2;    // GPIO 8 for the button
 bool ledflag = false;     // LED status flag
 
-// Update these with values suitable for your network.
-const char* ssid = "honor 9x";                 //use your ssid
-const char* password = "wifihonor9x";    //use your password
 const char* mqtt_server = "mqtt.louis.systems";
 const char* topic = "prises";
 
@@ -34,35 +32,39 @@ int value = 0;
 void sendReply();
 float getTemperatureC();
 
-void setup_wifi() {
-    delay(10);
-    // We start by connecting to a WiFi network
-    Serial.println();
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
+DynamicJsonDocument doc(1024);
 
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
+void setup() {
+    Serial.begin(115200);
+    sensors.begin();                 // On initialise la bibliothèque Dallas
+    WiFiManager wm;
+    bool res;
+    res = wm.autoConnect("Prise1","totototo"); // password protected ap
+    if(!res) {
+        Serial.println("Failed to connect");
+        // ESP.restart();
+    } 
+    else {
+        //if you get here you have connected to the WiFi    
+        Serial.println("connected...yeey :)");
     }
-
-    randomSeed(micros());
-
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+    pinMode(button, INPUT);    // define button as an input
+    pinMode(D1, OUTPUT);         // define LED as an output
+    digitalWrite(D1, LOW);     // turn output off just in case
+    client.setServer(mqtt_server, 1883);
+    client.setCallback(callback);
 }
 
-DynamicJsonDocument doc(1024);
+float getTemperatureC() {
+    sensors.requestTemperatures();
+    return sensors.getTempCByIndex(0);
+}
+
 // Check for Message received on define topic for MQTT Broker
 void callback(char* topic, byte* payload, unsigned int length) {
     Serial.print("Message arrived [");
     Serial.print(topic);
-    Serial.print("] ");
+    Serial.println("] ");
     
     deserializeJson(doc, payload);
 
@@ -104,22 +106,6 @@ void reconnect() {
             delay(5000);
         }
     }
-}
-
-void setup() {
-    sensors.begin();                 // On initialise la bibliothèque Dallas
-    pinMode(button, INPUT);    // define button as an input
-    pinMode(D1, OUTPUT);         // define LED as an output
-    digitalWrite(D1, LOW);     // turn output off just in case
-    Serial.begin(115200);
-    setup_wifi();
-    client.setServer(mqtt_server, 1883);
-    client.setCallback(callback);
-}
-
-float getTemperatureC() {
-    sensors.requestTemperatures();
-    return sensors.getTempCByIndex(0);
 }
 
 void sendReply() {
