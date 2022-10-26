@@ -88,6 +88,14 @@ class MQTTClient:
                 "start": start.isoformat(timespec="minutes"),
                 "end": end.isoformat(timespec="minutes")
             })))
+    
+    def reset_schedule(self, prise: str):
+        self.client.publish("schedule", str(json.dumps(
+            {
+                "sender": self.clientid,
+                "message_type": "schedule_reset",
+                "prise": prise
+            })))
 
     def close(self):
         self.client.loop_stop()

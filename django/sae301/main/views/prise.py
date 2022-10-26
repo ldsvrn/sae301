@@ -46,3 +46,7 @@ def schedule(request):
     else:
         form = ScheduleForm()
         return render(request, 'schedule.html', {"form": form})
+
+def schedule_reset(request, prise: str):
+    mqtt.reset_schedule(prise)
+    return redirect('/')
