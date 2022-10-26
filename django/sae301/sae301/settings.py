@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mafwdfon8d4%^k#lklyo31zbub*$w8al9v9kce%8=(m5t80a%2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["mqtt.louis.systems", "192.168.69.1", "localhost"]
 

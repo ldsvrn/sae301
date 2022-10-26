@@ -62,4 +62,4 @@ systemctl restart nginx
 
 apt install certbot python3-certbot-nginx
 
-certbot --nginx -d mqtt.louis.systems
+certbot --nginx -d mqtt.louis.systems --register-unsafely-without-email -n
