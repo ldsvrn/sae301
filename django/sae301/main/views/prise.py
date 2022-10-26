@@ -2,6 +2,7 @@ import time
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from ..mqtt import MQTTClient
+from ..forms import ScheduleForm
 
 global mqtt
 
@@ -29,3 +30,19 @@ def set(request, prise: str, onoff: str):
 def request(request, prise: str):
     mqtt.request_wait(prise)
     return redirect('/')
+
+def schedule(request):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            prise = form.cleaned_data["prise"][0] # car c'est une liste avec 1 element
+            start = form.cleaned_data["start"]
+            end = form.cleaned_data["end"]
+            print(type(start))
+            mqtt.set_schedule(prise, start, end)
+            return redirect('/')
+        else:
+            return render(request, 'schedule.html', {"form": form})
+    else:
+        form = ScheduleForm()
+        return render(request, 'schedule.html', {"form": form})

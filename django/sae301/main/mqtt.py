@@ -18,7 +18,7 @@ class MQTTClient:
                 "message_type": "placeholder",
                 "prise": "placeholder",
                 "state": "placeholder",
-                "temp": "placeholder",
+                "temp": 0,
                 "timestamp": datetime.datetime.fromtimestamp(0)
             }
 
@@ -80,7 +80,7 @@ class MQTTClient:
         return self.__last_message
 
     def set_schedule(self, prise: str, start: datetime.time, end: datetime.time):
-        self.client.publish(self.topic, str(json.dumps(
+        self.client.publish("schedule", str(json.dumps(
             {
                 "sender": self.clientid,
                 "message_type": "schedule",
