@@ -1,0 +1,13 @@
+{% extends 'template.html' %}
+
+{% block title %}Planification{% endblock title %}
+
+{% block h1 %}Plages horaires{% endblock h1 %}
+
+{% block content %}
+<form method="post" action="/schedule">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-success" value="Enregistrer"/>
+</form>
+{% endblock content %}
