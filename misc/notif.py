@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import os
 import smtplib, ssl
 from email.message import EmailMessage
+from pushbullet import Pushbullet
 
 load_dotenv()
 
@@ -26,6 +27,7 @@ class MQTTNotification:
         self.client.connect("mqtt.louis.systems", 1883, 60)
         self.client.loop_start()
         self.send_mail = True
+        self.pb = Pushbullet(os.getenv("PUSHBULLET_API"))
         self.temp = {
             "prise": "",
             "temp": 0
@@ -60,7 +62,10 @@ class MQTTNotification:
                             msg.set_content(f"ATTENTION LA TEMPÉRATURE DE LA PRISE EST DE {self.temp['temp']}°C!!!!")
 
                             print(f"envoi mail à {self.email}, de {sender_email} (text: {msg})")
-                            server.send_message(msg)
+                            #server.send_message(msg)
+                            push = self.pb.push_note("Alerte température", f"{self.temp['prise']} {self.temp['temp']}°C!!!!")
+                            device = self.pb.devices[0]
+                            push2 = self.pb.push_sms(device, os.getenv("NUM"), f"{self.temp['prise']} {self.temp['temp']}°C!!!!")
                             self.send_mail = False
                     else:
                         print("mail déjà envoyé")
@@ -95,4 +100,4 @@ class MQTTNotification:
 
 
             
-schedule = MQTTNotification("prises", 10, "louis2555@orange.fr", os.getenv("EMAIL_PASSWORD"))
+schedule = MQTTNotification("prises", 10, "louis2555@orange.fr", str(os.getenv("EMAIL_PASSWORD")))
