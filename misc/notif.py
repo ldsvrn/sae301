@@ -48,7 +48,7 @@ class MQTTNotification:
                         context = ssl.create_default_context()
                         port = 587 
                         smtp_server = "smtp.office365.com"
-                        sender_email = "botmqtt.sae301@hotmail.com"  # Enter your address
+                        sender_email = "sae301bot@outlook.fr"  # Enter your address
                         print("envoi mail")
                         with smtplib.SMTP("smtp.office365.com", port) as server:
                             server.ehlo()  # Can be omitted
@@ -62,11 +62,13 @@ class MQTTNotification:
                             msg.set_content(f"ATTENTION LA TEMPÉRATURE DE LA PRISE EST DE {self.temp['temp']}°C!!!!")
 
                             print(f"envoi mail à {self.email}, de {sender_email} (text: {msg})")
-                            #server.send_message(msg)
+                            server.send_message(msg)
                             push = self.pb.push_note("Alerte température", f"{self.temp['prise']} {self.temp['temp']}°C!!!!")
-                            device = self.pb.devices[0]
-                            push2 = self.pb.push_sms(device, os.getenv("NUM"), f"{self.temp['prise']} {self.temp['temp']}°C!!!!")
-                            self.send_mail = False
+                            # On utilise le téléphone pour envoyer un SMS
+                            #device = self.pb.devices[0]
+                            #push2 = self.pb.push_sms(device, os.getenv("NUM"), f"{self.temp['prise']} {self.temp['temp']}°C!!!!")
+                            # On envoie pas de mail pour éviter de ban le compte outlook
+                            #self.send_mail = False
                     else:
                         print("mail déjà envoyé")
                 else:
@@ -97,6 +99,19 @@ class MQTTNotification:
                     "prise": message["sender"],
                     "temp": message["temp"]
                 }
+
+                # go mode full osef, faut juste qu'on valide là
+                match message["sender"]:
+                    case "prise1":
+                        if message["state"]:
+                            pass # allumer la led"
+                        else:
+                            pass # eteindre
+                    case "prise2":
+                        if message["state"]:
+                            pass 
+                        else:
+                            pass
 
 
             
