@@ -73,7 +73,7 @@ class MQTTNotification:
                         print("mail déjà envoyé")
                 else:
                     self.send_mail = True
-            t.sleep(55)
+            t.sleep(300)
 
 
     def on_connect(self, client, userdata, flags, rc):
@@ -101,18 +101,19 @@ class MQTTNotification:
                 }
 
                 # go mode full osef, faut juste qu'on valide là
+                # ça spamme pushbullet, faudrait garder l'ancien état pour envoyer une notification que si l'état change
                 match message["sender"]:
                     case "prise1":
                         if message["state"]:
-                            pass # allumer la led"
+                            push = self.pb.push_note("Prise1 ON", "La prise 1 est allumée!")
                         else:
-                            pass # eteindre
+                            push = self.pb.push_note("Prise1 OFF", "La prise 1 est éteinte!")
                     case "prise2":
                         if message["state"]:
-                            pass 
+                            push = self.pb.push_note("Prise2 ON", "La prise 2 est allumée!")
                         else:
-                            pass
+                            push = self.pb.push_note("Prise2 OFF", "La prise 2 est éteinte!")
 
 
             
-schedule = MQTTNotification("prises", 10, "louis2555@orange.fr", str(os.getenv("EMAIL_PASSWORD")))
+schedule = MQTTNotification("prises", 28, "louis2555@orange.fr", str(os.getenv("EMAIL_PASSWORD")))

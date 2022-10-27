@@ -7,7 +7,7 @@ from ..forms import ScheduleForm
 global mqtt
 
 # mqtt last will / testament
-mqtt = MQTTClient("mqtt.louis.systems", 1883, "prises")
+mqtt = MQTTClient("192.168.69.2", 1883, "prises")
 
 def main(request):
     data = mqtt.last_message

@@ -9,6 +9,12 @@
     {% elif prise1.state == False %}
         <a type="button" class="btn btn-success" href="/set/prise1/on">Allumer</a>
         <p>{{prise1.temp}}°C</p>
+
+        {% if prise1.temp > 28 %}
+        <div class="alert alert-warning" role="alert">
+            La température est supérieure à 28°C!
+        </div>
+        {% endif %}
     {% else %}
     <div class="alert alert-danger" role="alert">
         Impossible de récupérer l'état de la prise
@@ -23,6 +29,12 @@
     {% elif prise2.state == False %}
         <a type="button" class="btn btn-success" href="/set/prise2/on">Allumer</a>
         <p>{{prise2.temp}}°C </p>
+
+        {% if prise2.temp > 28 %}
+        <div class="alert alert-warning" role="alert">
+            La température est supérieure à 28°C!
+        </div>
+        {% endif %}
     {% else %}
         <div class="alert alert-danger" role="alert">
             Impossible de récupérer l'état de la prise
